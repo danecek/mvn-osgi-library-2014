@@ -8,7 +8,7 @@
     </parent>
 
     <groupId>org.lib</groupId>
-    <artifactId>model</artifactId>
+    <artifactId>utils</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
@@ -21,19 +21,13 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>org.lib.model.Activator</Bundle-Activator>
-                        <Export-Package >org.lib.model</Export-Package>
-                        <Private-Package>org.lib.model.*</Private-Package>
+                        <Bundle-Activator>org.lib.utils.Activator</Bundle-Activator>
+                        <Export-Package >org.lib.utils</Export-Package>
+                        <Private-Package>org.lib.utils.*</Private-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    <dependencies>
-        <dependency>
-            <groupId>org.lib</groupId>
-            <artifactId>utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+
 </project>

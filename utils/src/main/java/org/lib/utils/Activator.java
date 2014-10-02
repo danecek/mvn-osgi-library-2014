@@ -1,4 +1,4 @@
-package org.lib.model;
+package org.lib.utils;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -6,7 +6,7 @@ import org.osgi.framework.BundleContext;
 public class Activator implements BundleActivator {
 
     public void start(BundleContext context) throws Exception {
-        System.out.println("model start");
+        // TODO add activation code here
     }
 
     public void stop(BundleContext context) throws Exception {
