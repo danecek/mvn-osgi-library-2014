@@ -13,7 +13,7 @@
     <modules>
         <module>model</module>
         <module>utils</module>
-        <module>integeration</module>
+        <module>integration</module>
     </modules>
     
     <dependencyManagement>

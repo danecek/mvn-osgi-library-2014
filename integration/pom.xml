@@ -8,7 +8,7 @@
     </parent>
 
     <groupId>org.lib</groupId>
-    <artifactId>integeration</artifactId>
+    <artifactId>integration</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
@@ -40,4 +40,5 @@
             </plugin>
         </plugins>
     </build>
+    <name>integration</name>
 </project>
