@@ -3,7 +3,6 @@ package org.lib.model;
 public class Book {
     
     private final BookId id;
-
     private final String title;
     private final String author;
 
@@ -11,6 +10,11 @@ public class Book {
         this.id = id;
         this.title = title;
         this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" + "id=" + id.getId() + ", title=" + title + ", author=" + author + '}';
     }
 
     /**
