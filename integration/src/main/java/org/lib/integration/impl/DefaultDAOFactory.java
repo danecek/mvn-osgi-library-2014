@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lib.integeration.impl;
+package org.lib.integration.impl;
 
-import org.lib.integeration.AbstractDAOFactory;
-import org.lib.integeration.BookDAO;
+import org.lib.integration.AbstractDAOFactory;
+import org.lib.integration.BookDAO;
+import org.lib.integration.BorrowDAO;
 
 /**
  *
@@ -17,6 +18,11 @@ public class DefaultDAOFactory extends AbstractDAOFactory {
     @Override
     public BookDAO getBooksDAO() {
         return new DefaultBookDAO();
+    }
+
+    @Override
+    public BorrowDAO getBorrowDAO() {
+        return new DefaultBorrowDAO();
     }
     
 }

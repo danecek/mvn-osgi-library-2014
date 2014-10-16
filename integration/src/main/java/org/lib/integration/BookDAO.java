@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lib.integeration;
+package org.lib.integration;
 
 import java.util.Collection;
 import org.lib.model.Book;
-import org.lib.model.BookId;
+import org.lib.utils.LibraryException;
 
-/**
- *
- * @author danecek
- */
 public interface BookDAO {
 
-    void create(BookId id, String title, String author);
-    Collection<Book> getAll();
+    void create(String title, String author) throws LibraryException;
+
+    Collection<Book> getAll() throws LibraryException;
 
 }

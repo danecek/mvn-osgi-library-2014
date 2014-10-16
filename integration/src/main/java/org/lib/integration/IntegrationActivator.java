@@ -1,15 +1,15 @@
-package org.lib.integeration;
+package org.lib.integration;
 
-import org.lib.model.BookId;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator implements BundleActivator {
+public class IntegrationActivator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
+        System.out.println("integration start");
         BookDAO bdao = AbstractDAOFactory.getInstance().getBooksDAO();
-        bdao.create(new BookId(2), "RUR", "Capek");
+        bdao.create("RUR", "Capek");
         System.out.println(bdao.getAll());
         // TODO add activation code here
     }
