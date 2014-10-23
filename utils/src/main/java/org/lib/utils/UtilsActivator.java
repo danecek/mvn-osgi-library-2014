@@ -1,16 +1,16 @@
-package org.lib.model;
+package org.lib.utils;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator implements BundleActivator {
+public class UtilsActivator implements BundleActivator {
 
     public void start(BundleContext context) throws Exception {
-        System.out.println("model start");
+        System.out.println("utils start");
     }
 
     public void stop(BundleContext context) throws Exception {
-        // TODO add deactivation code here
+        System.out.println("utils stop");
     }
 
 }

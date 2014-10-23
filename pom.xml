@@ -15,7 +15,8 @@
         <module>utils</module>
         <module>integration</module>
         <module>business</module>
-    </modules>
+    <module>richclient</module>
+  </modules>
     
     <dependencyManagement>
         <dependencies>

@@ -7,12 +7,12 @@ public class BusinessActivator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
-        System.out.println("start business");
+        System.out.println("business start");
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        // TODO add deactivation code here
+        System.out.println("business stop");
     }
 
 }
