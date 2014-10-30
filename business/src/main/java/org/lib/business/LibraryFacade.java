@@ -7,6 +7,7 @@ package org.lib.business;
 
 import java.util.Collection;
 import org.lib.business.impl.DefaultLibraryFacade;
+import org.lib.model.Book;
 import org.lib.model.BookId;
 import org.lib.model.LibReaderId;
 import org.lib.utils.LibraryException;
@@ -33,5 +34,7 @@ public abstract class LibraryFacade {
     public abstract void createBook(String title, String author) throws LibraryException;
 
     public abstract void borrowBooks(LibReaderId readerId, Collection<BookId> books) throws LibraryException;
+
+    public abstract Collection<Book> getAllBooks() throws LibraryException;
 
 }
