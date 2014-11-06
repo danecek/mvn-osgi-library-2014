@@ -5,6 +5,9 @@
  */
 package org.lib.richclient;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -27,27 +30,38 @@ public abstract class AbstractLibDialog extends Stage implements Validator {
     Text errorMessage = new Text();
 
     public AbstractLibDialog(String title) {
-//        errorMessage.setStyle("-fx-fill: red");
+        errorMessage.setStyle("-fx-fill: red");
+        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent t) {
+                hide();
+            }
+        });
         setTitle(title);
         setAlwaysOnTop(true);
         setResizable(false);
-        this.centerOnScreen();
-        this.initOwner(MainWindow.getInstance());
-        this.initModality(Modality.APPLICATION_MODAL);
-        HBox butons = new HBox(okButton, cancelButton);
-        butons.setAlignment(Pos.BASELINE_RIGHT);
-        VBox vbox = new VBox(createInterior(), butons, errorMessage);
+        centerOnScreen();
+        initOwner(MainWindow.getInstance());
+        initModality(Modality.APPLICATION_MODAL);
+        VBox vbox = new VBox(createInterior(), createButtonbox(), errorMessage);
+        vbox.setPadding(new Insets(10));
         Scene s = new Scene(vbox);
         setScene(s);
         show();
     }
-    
+
     protected Button getOkButon() {
         return okButton;
     }
 
-
     protected abstract Node createInterior();
 
+    protected HBox createButtonbox() {
+        HBox buttons = new HBox(getOkButon(), cancelButton);
+        buttons.setSpacing(10);
+        buttons.setAlignment(Pos.BASELINE_RIGHT);
+        return buttons;
+    }
 
 }

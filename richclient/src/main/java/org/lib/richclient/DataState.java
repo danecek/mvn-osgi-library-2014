@@ -10,18 +10,15 @@ import java.util.HashSet;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
-/**
- *
- * @author danecek
- */
-public class ApplicationState implements Observable {
+
+public class DataState implements Observable {
     
-    public static ApplicationState INSTANCE = new ApplicationState();
+    public static DataState INSTANCE = new DataState();
     
-    private ApplicationState() {
+    private DataState() {
     }
     
-    Collection<InvalidationListener> listeners = new HashSet<>();
+    private Collection<InvalidationListener> listeners = new HashSet<>();
     
     @Override
     public void addListener(InvalidationListener il) {

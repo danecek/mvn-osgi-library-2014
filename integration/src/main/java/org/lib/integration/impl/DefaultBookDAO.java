@@ -17,7 +17,11 @@ import org.lib.model.BookId;
  *
  * @author danecek
  */
-public class DefaultBookDAO implements BookDAO {
+public final class DefaultBookDAO implements BookDAO {
+
+    public DefaultBookDAO() {
+        create("xx", "yyy");
+    }
 
     Map<BookId, Book> booksMap = new HashMap<>();
     private static int idCounter;

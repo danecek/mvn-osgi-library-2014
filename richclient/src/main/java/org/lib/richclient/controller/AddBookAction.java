@@ -5,13 +5,8 @@
  */
 package org.lib.richclient.controller;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import org.lib.business.LibraryFacade;
 import org.lib.richclient.AddBookDialog;
-import org.lib.richclient.ApplicationState;
-import org.lib.utils.LibraryException;
 
 /**
  *

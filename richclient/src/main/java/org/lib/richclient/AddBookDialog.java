@@ -29,19 +29,18 @@ public final class AddBookDialog extends AbstractLibDialog implements Validator 
 
     @Override
     public boolean validate() {
+        boolean ok = true;
+        String err = "";
         if (title.getText() == null || title.getText().isEmpty()) {
-            errorMessage.setText("empty title");
-            getOkButon().setDisable(false);
-            return false;
+            err = "empty title";
+            ok = false;
+        } else if (author.getText() == null || author.getText().isEmpty()) {
+            err = "empty author";
+            ok = false;
         }
-        if (author.getText() == null || author.getText().isEmpty()) {
-            errorMessage.setText("empty author");
-            getOkButon().setDisable(false);
-            return false;
-        }
-        errorMessage.setText("");
-        getOkButon().setDisable(true);
-        return true;
+        errorMessage.setText(err);
+        getOkButon().setDisable(!ok);
+        return ok;
     }
 
     @Override
@@ -61,14 +60,8 @@ public final class AddBookDialog extends AbstractLibDialog implements Validator 
 
     public AddBookDialog() {
         super("Add Book"); // todo
-        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent t) {
-                hide();
-            }
-        });
-        validate();
+
         getOkButon().setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -76,7 +69,7 @@ public final class AddBookDialog extends AbstractLibDialog implements Validator 
                 if (validate()) {
                     try {
                         LibraryFacade.getInstance().createBook(title.getText(), author.getText());
-                        ApplicationState.INSTANCE.invalidate();
+                        DataState.INSTANCE.invalidate();
                         hide();
                     } catch (LibraryException ex) {
                         Logger.getLogger(AddBookDialog.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,6 +77,7 @@ public final class AddBookDialog extends AbstractLibDialog implements Validator 
                 }
             }
         });
+        validate();
     }
 
 }
