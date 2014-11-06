@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import org.lib.business.LibraryFacade;
+import org.lib.richclient.AddBookDialog;
+import org.lib.richclient.ApplicationState;
 import org.lib.utils.LibraryException;
 
 /**
@@ -25,12 +27,7 @@ public class AddBookAction extends LibraryAction {
 
     @Override
     public void handle(ActionEvent t) {
-        try {
-            LibraryFacade.getInstance().createBook("foo", "foo");
-            System.out.println(LibraryFacade.getInstance().getAllBooks());
-        } catch (LibraryException ex) {
-            Logger.getLogger(AddBookAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new AddBookDialog().show();
     }
 
 }

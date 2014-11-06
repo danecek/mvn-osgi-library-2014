@@ -30,8 +30,16 @@ public abstract class AbstractId<T extends AbstractId>
         return id;
     }
 
+    @Override
     public int compareTo(T t) {
         return id - t.getId();
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(id);
+    }
+    
+    
 
 }

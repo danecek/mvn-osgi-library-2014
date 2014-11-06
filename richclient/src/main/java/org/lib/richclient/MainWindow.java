@@ -23,6 +23,15 @@ import org.osgi.framework.launch.Framework;
  * @author danecek
  */
 public class MainWindow extends Stage {
+    
+    private static MainWindow instance;
+
+    /**
+     * @return the instance
+     */
+    public static MainWindow getInstance() {
+        return instance;
+    }
 
     private MenuBar createMenubar() {
         MenuBar mb = new MenuBar();
@@ -32,6 +41,7 @@ public class MainWindow extends Stage {
     }
 
     public MainWindow(BundleContext context) {
+        instance = this;
         setOnCloseRequest(new EventHandler<WindowEvent>() {
 
             @Override
