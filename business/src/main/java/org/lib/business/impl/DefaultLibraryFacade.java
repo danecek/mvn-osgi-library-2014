@@ -30,8 +30,8 @@ public class DefaultLibraryFacade extends LibraryFacade {
     }
 
     @Override
-    public void createBook(String title, String author) throws LibraryException {
-        booksDAO.create(title, author);
+    public void createBook(String title) throws LibraryException {
+        booksDAO.create(title);
     }
 
     @Override

@@ -2,16 +2,16 @@ package org.lib.integration;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
 
 public class IntegrationActivator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
         System.out.println("integration start");
-//        BookDAO bdao = AbstractDAOFactory.getInstance().getBooksDAO();
-//        bdao.create("RUR", "Capek");
-//        System.out.println(bdao.getAll());
-//        // TODO add activation code here
+     //   ServiceReference sr = context.getServiceReference(AbstractDAOFactory.class);
+        ServiceTracker st = new ServiceTracker(context, AbstractDAOFactory.class.getName(), null);
+        AbstractDAOFactory.setSt(st);
     }
 
     @Override

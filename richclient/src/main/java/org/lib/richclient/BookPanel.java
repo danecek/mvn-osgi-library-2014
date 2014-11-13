@@ -47,18 +47,9 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Book, BookId> titleCol = new TableColumn<>("Title");  // todo lok
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        TableColumn<Book, BookId> authorCol = new TableColumn<>("Author");  // todo lok
-        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
-        tab.getColumns().addAll(idCol, titleCol, authorCol);
-        tab.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        tab.getSelectionModel().getSelectedItems().addListener(new InvalidationListener() {
-
-            @Override
-            public void invalidated(Observable observable) {
-                DeleteBooksAction.INSTANCE.disable(getSelected().isEmpty());
-                System.out.println(observable);//     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
+//        TableColumn<Book, BookId> authorCol = new TableColumn<>("Author");  // todo lok
+//        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        tab.getColumns().addAll(idCol, titleCol);//, authorCol);
         tab.setItems(data);
         return tab;
     }

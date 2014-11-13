@@ -4,17 +4,15 @@ public class Book {
     
     private final BookId id;
     private final String title;
-    private final String author;
 
-    public Book(BookId id, String title, String author) {
+    public Book(BookId id, String title) {
         this.id = id;
         this.title = title;
-        this.author = author;
     }
 
     @Override
     public String toString() {
-        return "Book{" + "id=" + id.getId() + ", title=" + title + ", author=" + author + '}';
+        return "Book{" + "id=" + id.getId() + ", title=" + title + "}";
     }
 
     /**
@@ -31,12 +29,5 @@ public class Book {
         return title;
     }
 
-    /**
-     * @return the author
-     */
-    public String getAuthor() {
-        return author;
-    }
-    
 
 }
