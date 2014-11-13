@@ -7,15 +7,12 @@ package org.lib.richclient;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import org.lib.business.LibraryFacade;
 import org.lib.model.Book;
-import org.lib.model.BookId;
 import org.lib.richclient.controller.Validator;
 import org.lib.utils.LibraryException;
 
@@ -36,7 +33,7 @@ public final class DeleteBooksDialog extends AbstractLibDialog implements Valida
     }
 
     public DeleteBooksDialog() {
-        super("Add Book"); // todo
+        super("Delete Book"); // todo
 
         getOkButon().setOnAction(new EventHandler<ActionEvent>() {
 
