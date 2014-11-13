@@ -17,10 +17,6 @@ import org.lib.integration.AbstractDAOFactory;
 import org.lib.integration.BookDAO;
 import org.lib.integration.BorrowDAO;
 
-/**
- *
- * @author danecek
- */
 public class DerbyDAOFactory extends AbstractDAOFactory {
 
     Connection dbConnection;
@@ -29,7 +25,7 @@ public class DerbyDAOFactory extends AbstractDAOFactory {
     public DerbyDAOFactory() {
         try {
             dbConnection = createConnection();
-            dbConnection.setAutoCommit(false);
+            dbConnection.setAutoCommit(true);
             DatabaseMetaData m = dbConnection.getMetaData();
             ResultSet rs = m.getTables(null, null, "BOOKS", null);
             if (!rs.next()) {
@@ -39,6 +35,7 @@ public class DerbyDAOFactory extends AbstractDAOFactory {
                 s.executeUpdate("CREATE TABLE BOOKS"
                         + "(ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
                         + "TITLE   VARCHAR(50),"
+                        + "AUTHOR  VARCHAR(50),"
                         + "PRIMARY KEY (ID))");
 
             }
@@ -57,8 +54,6 @@ public class DerbyDAOFactory extends AbstractDAOFactory {
             //   Class.forName("org.apache.derby.jdbc.EmbeddedDriver", true, context.getBundle().loadClass(null));
             // Class.forName("org.apache.derby.jdbc.EmbeddedDriver", true, Thread.currentThread().getContextClassLoader());
             new org.apache.derby.jdbc.EmbeddedDriver();
-            // System.out.println(ed.getClass().getClassLoader());
-            //   System.out.println(getClass().getClassLoader());
             String url = "jdbc:derby:" + System.getProperty("user.home") + "/libraryDB; create=true";
             dbCon = DriverManager.getConnection(url);
         } catch (SQLException ex) {
@@ -79,6 +74,14 @@ public class DerbyDAOFactory extends AbstractDAOFactory {
     public BorrowDAO getBorrowDAO() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
+    }
+
+    public void closeConnection() {
+        try {
+            dbConnection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DerbyDAOFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

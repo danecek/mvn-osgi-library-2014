@@ -43,7 +43,7 @@ public class BookTest {
     @Test
     public void testGetId() {
         System.out.println("getId");
-        Book instance = new Book(new BookId(2), "RUR");
+        Book instance = new Book(new BookId(2), "RUR", "Capek");
         BookId expResult = new BookId(2);
         BookId result = instance.getId();
         assertEquals(expResult, result);

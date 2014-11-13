@@ -24,14 +24,12 @@ import org.lib.utils.LibraryException;
  */
 public class DerbyBookDAO implements BookDAO {
 
-    PreparedStatement getAllPs;
-    PreparedStatement createPs;
-    Connection con;
+    private PreparedStatement getAllPs;
+    private PreparedStatement createPs;
 
     public DerbyBookDAO(Connection connection) {
-        this.con = con;
         try {
-            createPs = connection.prepareStatement("INSERT INTO BOOKS VALUES(DEFAULT, ?)");
+            createPs = connection.prepareStatement("INSERT INTO BOOKS VALUES(DEFAULT, ?, ?)");
 //            deletePS = connection.prepareStatement("DELETE FROM BOOKS WHERE ID = ?");
             getAllPs = connection.prepareStatement("SELECT * FROM BOOKS");
         } catch (SQLException ex) {
@@ -40,9 +38,10 @@ public class DerbyBookDAO implements BookDAO {
     }
 
     @Override
-    public void create(String title) throws LibraryException {
+    public void create(String title, String author) throws LibraryException {
         try {
             createPs.setString(1, title);
+            createPs.setString(2, author);
             int n = createPs.executeUpdate();
             if (n != 1) {
                 throw new LibraryException("creation failed");
@@ -52,13 +51,14 @@ public class DerbyBookDAO implements BookDAO {
         }
     }
 
+    @Override
     public Collection<Book> getAll() throws LibraryException {
         ResultSet rs;
         try {
             rs = getAllPs.executeQuery();
-            ArrayList<Book> books = new ArrayList<Book>();
+            ArrayList<Book> books = new ArrayList<>();
             while (rs.next()) {
-                books.add(new Book(new BookId(rs.getInt(1)), rs.getString(2)));
+                books.add(new Book(new BookId(rs.getInt(1)), rs.getString(2), rs.getString(3)));
             }
             return books;
         } catch (SQLException ex) {
@@ -67,6 +67,7 @@ public class DerbyBookDAO implements BookDAO {
 
     }
 
+    @Override
     public void delete(BookId id) throws LibraryException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

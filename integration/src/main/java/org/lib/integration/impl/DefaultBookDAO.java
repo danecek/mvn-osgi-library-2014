@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.lib.integration.BooksDAO;
+import org.lib.integration.BookDAO;
 import org.lib.model.Book;
 import org.lib.model.BookId;
 import org.lib.utils.LibraryException;
@@ -18,7 +18,7 @@ import org.lib.utils.LibraryException;
  *
  * @author danecek
  */
-public final class DefaultBookDAO implements BooksDAO {
+public final class DefaultBookDAO implements BookDAO {
 
     public DefaultBookDAO() {
 
@@ -28,9 +28,9 @@ public final class DefaultBookDAO implements BooksDAO {
     private static int idCounter;
 
     @Override
-    public void create(String title) {
+    public void create(String title, String author) {
         BookId id = new BookId(++idCounter);
-        booksMap.put(id, new Book(id, title));
+        booksMap.put(id, new Book(id, title, author));
     }
 
     @Override

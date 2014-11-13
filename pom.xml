@@ -57,7 +57,11 @@
                 <artifactId>derbyDB</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.derby</artifactId>
+                <version>10.11.1.1_1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     

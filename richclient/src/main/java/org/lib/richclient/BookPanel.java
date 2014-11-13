@@ -5,6 +5,7 @@
  */
 package org.lib.richclient;
 
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.InvalidationListener;
@@ -12,7 +13,6 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
@@ -20,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.lib.business.LibraryFacade;
 import org.lib.model.Book;
 import org.lib.model.BookId;
-import org.lib.richclient.controller.DeleteBooksAction;
 import org.lib.utils.LibraryException;
 
 /**
@@ -47,9 +46,9 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Book, BookId> titleCol = new TableColumn<>("Title");  // todo lok
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-//        TableColumn<Book, BookId> authorCol = new TableColumn<>("Author");  // todo lok
-//        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
-        tab.getColumns().addAll(idCol, titleCol);//, authorCol);
+        TableColumn<Book, BookId> authorCol = new TableColumn<>("Author");  // todo lok
+        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        tab.getColumns().addAll(idCol, titleCol, authorCol);
         tab.setItems(data);
         return tab;
     }
@@ -67,7 +66,6 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
 
     public ObservableList<Book> getSelected() {
         ObservableList<Book> selected = table.getSelectionModel().getSelectedItems();
-       // System.out.println(selected);
         return selected;
     }
 
@@ -75,7 +73,8 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
     public void invalidated(Observable o) {
         data.clear();
         try {
-            data.addAll(LibraryFacade.getInstance().getAllBooks());
+            Collection<Book> books = LibraryFacade.getInstance().getAllBooks();
+            data.addAll(books);
         } catch (LibraryException ex) {
             Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

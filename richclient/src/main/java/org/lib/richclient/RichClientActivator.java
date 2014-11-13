@@ -1,5 +1,6 @@
 package org.lib.richclient;
 
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import org.osgi.framework.BundleActivator;
@@ -9,7 +10,7 @@ public class RichClientActivator implements BundleActivator {
 
     @Override
     public void start(final BundleContext context) throws Exception {
-        System.out.println("richclient start");
+        Logger.getLogger(getClass().getSimpleName()).info("start");
         new JFXPanel();
         Platform.runLater(new Runnable() {
 
@@ -23,7 +24,7 @@ public class RichClientActivator implements BundleActivator {
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        System.out.println("richclient stop");
+        Logger.getLogger(getClass().getSimpleName()).info("stop");
     }
 
 }

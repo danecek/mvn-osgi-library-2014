@@ -10,9 +10,9 @@ import org.lib.model.Book;
 import org.lib.model.BookId;
 import org.lib.utils.LibraryException;
 
-public interface BooksDAO {
+public interface BookDAO {
 
-    void create(String title) throws LibraryException;
+    void create(String title, String author) throws LibraryException;
 
     Collection<Book> getAll() throws LibraryException;
     
