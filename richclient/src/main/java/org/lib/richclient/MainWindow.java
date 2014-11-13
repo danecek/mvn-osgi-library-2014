@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -44,12 +45,10 @@ public class MainWindow extends Stage {
         return mb;
     }
 
-    private HBox createToolbar() {
-        HBox hbox = new HBox(AddBookAction.INSTANCE.createButton(),
+    private ToolBar createToolbar() {
+        ToolBar hbox = new ToolBar(AddBookAction.INSTANCE.createButton(),
                 DeleteBooksAction.INSTANCE.createButton());
         hbox.setPadding(new Insets(2));//;Style("-fx-border-color: red;");
-        //Border b = new Border(new BorderStroke(null, BorderStrokeStyle.NONE, CornerRadii.EMPTY, BorderWidths.EMPTY));
-        //   hbox.setBorder();
         return hbox;
     }
 
