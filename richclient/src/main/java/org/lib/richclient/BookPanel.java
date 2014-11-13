@@ -44,9 +44,9 @@ public class BookPanel extends VBox implements InvalidationListener {
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Book, BookId> titleCol = new TableColumn<>("Title");  // todo lok
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        TableColumn<Book, BookId> authorCol = new TableColumn<>("Author");  // todo lok
-        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
-        tab.getColumns().addAll(idCol, titleCol, authorCol);
+//        TableColumn<Book, BookId> authorCol = new TableColumn<>("Author");  // todo lok
+//        authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        tab.getColumns().addAll(idCol, titleCol);//, authorCol);
         tab.setItems(data);
         return new TitledPane("Books", tab);
     }

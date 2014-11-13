@@ -75,7 +75,7 @@ public final class AddBookDialog extends AbstractLibDialog implements Validator 
             public void handle(ActionEvent t) {
                 if (validate()) {
                     try {
-                        LibraryFacade.getInstance().createBook(title.getText(), author.getText());
+                        LibraryFacade.getInstance().createBook(title.getText());
                         ApplicationState.INSTANCE.invalidate();
                         hide();
                     } catch (LibraryException ex) {

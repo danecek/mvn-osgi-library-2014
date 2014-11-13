@@ -31,7 +31,7 @@ public abstract class LibraryFacade {
         return instance;
     }
 
-    public abstract void createBook(String title, String author) throws LibraryException;
+    public abstract void createBook(String title) throws LibraryException;
 
     public abstract void borrowBooks(LibReaderId readerId, Collection<BookId> books) throws LibraryException;
 

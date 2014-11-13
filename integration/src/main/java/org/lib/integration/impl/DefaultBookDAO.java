@@ -23,9 +23,9 @@ public class DefaultBookDAO implements BookDAO {
     private static int idCounter;
 
     @Override
-    public void create(String title, String author) {
+    public void create(String title) {
         BookId id = new BookId(++idCounter);
-        booksMap.put(id, new Book(id, title, author));
+        booksMap.put(id, new Book(id, title));
     }
 
     @Override

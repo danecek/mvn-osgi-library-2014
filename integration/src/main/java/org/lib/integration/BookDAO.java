@@ -11,7 +11,7 @@ import org.lib.utils.LibraryException;
 
 public interface BookDAO {
 
-    void create(String title, String author) throws LibraryException;
+    void create(String title) throws LibraryException;
 
     Collection<Book> getAll() throws LibraryException;
 
