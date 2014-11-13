@@ -7,12 +7,13 @@ package org.lib.richclient;
 
 import javafx.scene.control.Menu;
 import org.lib.richclient.controller.AddBookAction;
+import org.lib.richclient.controller.DeleteBooksAction;
 
 public class BookMenu extends Menu {
 
     public BookMenu() {
         super("Books");  // todo lok
-        getItems().addAll(AddBookAction.INSTANCE.createMenuItem());
+        getItems().addAll(AddBookAction.INSTANCE.createMenuItem(), DeleteBooksAction.INSTANCE.createMenuItem());
     }
 
 }

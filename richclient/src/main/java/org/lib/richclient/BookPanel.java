@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.lib.business.LibraryFacade;
 import org.lib.model.Book;
 import org.lib.model.BookId;
+import org.lib.richclient.controller.DeleteBooksAction;
 import org.lib.utils.LibraryException;
 
 /**
@@ -27,6 +28,8 @@ import org.lib.utils.LibraryException;
  * @author danecek
  */
 public final class BookPanel extends TitledPane implements InvalidationListener {
+
+    public static BookPanel instance;
 
     private Label createTitle() {
         Label title = new Label("Books");
@@ -52,6 +55,7 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
 
             @Override
             public void invalidated(Observable observable) {
+                DeleteBooksAction.INSTANCE.disable(getSelected().isEmpty());
                 System.out.println(observable);//     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
@@ -59,17 +63,21 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
         return tab;
     }
 
+    TableView<Book> table;
+
     public BookPanel() {
+        instance = this;
         setText("Books"); //todo
-        setContent(createTable());
+        setContent(table = createTable());
         DataState.INSTANCE.addListener(this);
-        getChildren().addAll(createTitle(), createTable());
+        getChildren().addAll(createTitle(), table);
         invalidated(null);
     }
 
-    Book getSelected() {
-        TableView<Book> tab = null;
-        return tab.getSelectionModel().getSelectedItem();
+    public ObservableList<Book> getSelected() {
+        ObservableList<Book> selected = table.getSelectionModel().getSelectedItems();
+       // System.out.println(selected);
+        return selected;
     }
 
     @Override

@@ -23,7 +23,7 @@ public abstract class AbstractDAOFactory {
         return instance;
     }
 
-    public abstract BookDAO getBooksDAO();
+    public abstract BooksDAO getBooksDAO();
 
     public abstract BorrowDAO getBorrowDAO();
 

@@ -6,7 +6,7 @@
 package org.lib.integration.impl;
 
 import org.lib.integration.AbstractDAOFactory;
-import org.lib.integration.BookDAO;
+import org.lib.integration.BooksDAO;
 import org.lib.integration.BorrowDAO;
 
 /**
@@ -16,7 +16,7 @@ import org.lib.integration.BorrowDAO;
 public class DefaultDAOFactory extends AbstractDAOFactory {
 
     @Override
-    public BookDAO getBooksDAO() {
+    public BooksDAO getBooksDAO() {
         return new DefaultBookDAO();
     }
 

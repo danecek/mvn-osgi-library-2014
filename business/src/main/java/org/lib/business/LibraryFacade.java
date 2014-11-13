@@ -37,4 +37,7 @@ public abstract class LibraryFacade {
 
     public abstract Collection<Book> getAllBooks() throws LibraryException;
 
+    public abstract void deleteBook(BookId id) throws LibraryException;
+    
+
 }

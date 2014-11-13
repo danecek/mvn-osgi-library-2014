@@ -9,18 +9,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.lib.integration.BookDAO;
+import org.lib.integration.BooksDAO;
 import org.lib.model.Book;
 import org.lib.model.BookId;
+import org.lib.utils.LibraryException;
 
 /**
  *
  * @author danecek
  */
-public final class DefaultBookDAO implements BookDAO {
+public final class DefaultBookDAO implements BooksDAO {
 
     public DefaultBookDAO() {
-        create("xx", "yyy");
+
     }
 
     Map<BookId, Book> booksMap = new HashMap<>();
@@ -35,6 +36,11 @@ public final class DefaultBookDAO implements BookDAO {
     @Override
     public Collection<Book> getAll() {
         return new ArrayList<>(booksMap.values());
+    }
+
+    @Override
+    public void delete(BookId bookId) throws LibraryException {
+        booksMap.remove(bookId);
     }
 
 }

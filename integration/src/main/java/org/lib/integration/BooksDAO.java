@@ -7,12 +7,15 @@ package org.lib.integration;
 
 import java.util.Collection;
 import org.lib.model.Book;
+import org.lib.model.BookId;
 import org.lib.utils.LibraryException;
 
-public interface BookDAO {
+public interface BooksDAO {
 
     void create(String title, String author) throws LibraryException;
 
     Collection<Book> getAll() throws LibraryException;
+    
+    void delete(BookId bookId)  throws LibraryException;
 
 }

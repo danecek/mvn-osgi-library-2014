@@ -8,7 +8,7 @@ package org.lib.business.impl;
 import java.util.Collection;
 import org.lib.business.LibraryFacade;
 import org.lib.integration.AbstractDAOFactory;
-import org.lib.integration.BookDAO;
+import org.lib.integration.BooksDAO;
 import org.lib.integration.BorrowDAO;
 import org.lib.model.Book;
 import org.lib.model.BookId;
@@ -21,7 +21,7 @@ import org.lib.utils.LibraryException;
  */
 public class DefaultLibraryFacade extends LibraryFacade {
 
-    private final BookDAO booksDAO;
+    private final BooksDAO booksDAO;
     private final BorrowDAO borrowsDAO;
 
     public DefaultLibraryFacade() {
@@ -45,6 +45,11 @@ public class DefaultLibraryFacade extends LibraryFacade {
     @Override
     public Collection<Book> getAllBooks() throws LibraryException {
         return booksDAO.getAll();
+    }
+
+    @Override
+    public void deleteBook(BookId id) throws LibraryException {
+        booksDAO.delete(id);
     }
 
 }
