@@ -70,7 +70,7 @@ public class DerbyBookDAO implements BookDAO {
 
     @Override
     public void delete(BookId id) throws LibraryException {
-        
+
     }
 
     public void update(Book reader) throws LibraryException {
