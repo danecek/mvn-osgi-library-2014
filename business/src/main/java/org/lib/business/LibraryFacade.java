@@ -11,6 +11,7 @@ import org.lib.model.Book;
 import org.lib.model.BookId;
 import org.lib.model.LibReaderId;
 import org.lib.utils.LibraryException;
+import org.osgi.util.tracker.ServiceTracker;
 
 /**
  *
@@ -19,14 +20,16 @@ import org.lib.utils.LibraryException;
 public abstract class LibraryFacade {
 
     private static LibraryFacade instance;
+    static ServiceTracker<Object, Object> st;
 
     /**
      * @return the instance
      */
     public static LibraryFacade getInstance() {
         if (instance == null) {
-            // TODO
-            instance = new DefaultLibraryFacade();
+            instance = (LibraryFacade) st.getService();
+            if (instance == null)
+               instance = new DefaultLibraryFacade();
         }
         return instance;
     }
