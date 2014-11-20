@@ -19,8 +19,8 @@
         <module>derbyDB</module>
     <module>Protocol</module>
     <module>Proxy</module>
-    <module>Connection</module>
-  </modules>
+        <module>connection</module>
+    </modules>
     
     <dependencyManagement>
         <dependencies>
