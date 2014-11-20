@@ -8,14 +8,10 @@
     </parent>
 
     <groupId>org.lib</groupId>
-    <artifactId>connection</artifactId>
+    <artifactId>protocol</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -25,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Protocol</artifactId>
+            <artifactId>business</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -39,12 +35,12 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>org.lib.connection.Activator</Bundle-Activator>
-                        <Export-Package />
+                        <Bundle-Activator>org.lib.protocol.Activator</Bundle-Activator>
+                        <Export-Package >org.lib.protocol</Export-Package>
+                        <Private-Package>org.lib.protocol.*</Private-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

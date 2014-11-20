@@ -8,14 +8,10 @@
     </parent>
 
     <groupId>org.lib</groupId>
-    <artifactId>connection</artifactId>
+    <artifactId>proxy</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -25,7 +21,17 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>business</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>Protocol</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Connection</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -39,12 +45,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>org.lib.connection.Activator</Bundle-Activator>
+                        <Bundle-Activator>org.lib.proxy.Activator</Bundle-Activator>
                         <Export-Package />
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
