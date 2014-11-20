@@ -10,7 +10,8 @@ public class IntegrationActivator implements BundleActivator {
     @Override
     public void start(BundleContext context) throws Exception {
         Logger.getLogger(getClass().getSimpleName()).info("start");
-        ServiceTracker st = new ServiceTracker(context, AbstractDAOFactory.class.getName(), null);
+        ServiceTracker<AbstractDAOFactory, AbstractDAOFactory> st =
+                new ServiceTracker<>(context, AbstractDAOFactory.class.getName(), null);
         st.open();
         AbstractDAOFactory.setSt(st);
     }

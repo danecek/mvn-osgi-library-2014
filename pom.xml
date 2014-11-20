@@ -17,6 +17,9 @@
         <module>business</module>
         <module>richclient</module>
         <module>derbyDB</module>
+    <module>Protocol</module>
+    <module>Proxy</module>
+        <module>connection</module>
     </modules>
     
     <dependencyManagement>

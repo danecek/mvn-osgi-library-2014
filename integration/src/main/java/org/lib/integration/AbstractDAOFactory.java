@@ -15,11 +15,12 @@ import org.osgi.util.tracker.ServiceTracker;
 public abstract class AbstractDAOFactory {
 
     private static AbstractDAOFactory instance;
-    private static ServiceTracker st;
+    private static ServiceTracker<AbstractDAOFactory, AbstractDAOFactory> st;
 
     public static AbstractDAOFactory getInstance() {
         if (instance == null) {
-            instance = (AbstractDAOFactory) st.getService();
+            instance = st.getService();
+            System.out.println("daofactory: " + instance);
             if (instance == null) {
                 instance = new DefaultDAOFactory();
             }
