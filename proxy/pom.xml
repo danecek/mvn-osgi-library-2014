@@ -26,12 +26,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Protocol</artifactId>
+            <artifactId>protocol</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Connection</artifactId>
+            <artifactId>connection</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
