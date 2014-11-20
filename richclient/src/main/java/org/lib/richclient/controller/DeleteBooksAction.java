@@ -6,7 +6,6 @@
 package org.lib.richclient.controller;
 
 import javafx.event.ActionEvent;
-import org.lib.richclient.BookPanel;
 import org.lib.richclient.DeleteBooksDialog;
 
 /**
