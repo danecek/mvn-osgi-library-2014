@@ -16,5 +16,5 @@ public abstract class AbstractCommand<T> {
 
     public static String OK = "ok";
 
-    abstract T execute(LibraryFacade f) throws LibraryException;
+    public abstract T execute(LibraryFacade f) throws LibraryException;
 }

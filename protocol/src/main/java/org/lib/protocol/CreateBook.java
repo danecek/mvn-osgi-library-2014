@@ -23,7 +23,7 @@ public class CreateBook extends AbstractCommand<String> {
     }
 
     @Override
-    String execute(LibraryFacade f) throws LibraryException {
+    public String execute(LibraryFacade f) throws LibraryException {
         f.createBook(title, author);
         return OK;
     }

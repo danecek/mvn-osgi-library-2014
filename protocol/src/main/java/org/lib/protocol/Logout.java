@@ -5,20 +5,19 @@
  */
 package org.lib.protocol;
 
-import java.util.Collection;
 import org.lib.business.LibraryFacade;
-import org.lib.model.Book;
 import org.lib.utils.LibraryException;
 
 /**
  *
  * @author danecek
  */
-public class GetAllBooks extends AbstractCommand<Collection<Book>> {
+public class Logout extends AbstractCommand<Object>{
 
     @Override
-    public Collection<Book> execute(LibraryFacade f) throws LibraryException {
-        return f.getAllBooks();
+    public Object execute(LibraryFacade f) throws LibraryException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
 }

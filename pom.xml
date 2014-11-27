@@ -20,7 +20,8 @@
         <module>connection</module>
         <module>protocol</module>
         <module>proxy</module>
-    </modules>
+    <module>server</module>
+  </modules>
     
     <dependencyManagement>
         <dependencies>
@@ -58,6 +59,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>derbyDB</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>protocol</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
