@@ -1,6 +1,10 @@
 package org.lib.model;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
+
+    static final long serialVersionUID = 42L;
 
     private final BookId id;
     private final String title;

@@ -8,18 +8,20 @@ import org.osgi.framework.BundleContext;
 
 public class DerbyDBActivator implements BundleActivator {
 
+    static final Logger logger = Logger.getGlobal();
+
     private DerbyDAOFactory derbyDAOFactory;
 
     @Override
     public void start(BundleContext context) throws Exception {
-        Logger.getLogger(getClass().getSimpleName()).info("start");
+        logger.info("");
         derbyDAOFactory = new DerbyDAOFactory();
         context.registerService(AbstractDAOFactory.class.getName(), derbyDAOFactory, null);
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        Logger.getLogger(getClass().getSimpleName()).info("stop");
+        logger.info("");
         derbyDAOFactory.closeConnection();
     }
 

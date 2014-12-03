@@ -21,4 +21,9 @@ public class GetAllBooks extends AbstractCommand<Collection<Book>> {
         return f.getAllBooks();
     }
 
+    @Override
+    public String toString() {
+        return "GetAllBooks{" + '}';
+    }
+
 }

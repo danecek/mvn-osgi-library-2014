@@ -20,7 +20,6 @@ public abstract class AbstractDAOFactory {
     public static AbstractDAOFactory getInstance() {
         if (instance == null) {
             instance = st.getService();
-            System.out.println("daofactory: " + instance);
             if (instance == null) {
                 instance = new DefaultDAOFactory();
             }

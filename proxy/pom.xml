@@ -45,8 +45,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>org.lib.proxy.Activator</Bundle-Activator>
-                        <Export-Package />
+                        <Bundle-Activator>org.lib.proxy.ProxyActivator</Bundle-Activator>
+                        <Export-Package >org.lib.proxy</Export-Package>
+                        <Private-Package>org.lib.proxy.*</Private-Package>
                     </instructions>
                 </configuration>
             </plugin>

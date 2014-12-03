@@ -6,12 +6,12 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 public class ServerActivator implements BundleActivator {
-    
-    static Logger logger = Logger.getLogger(ServerActivator.class.getSimpleName());
+
+    static final Logger logger = Logger.getGlobal();
 
     @Override
     public void start(BundleContext context) throws Exception {
-        logger.info("server starts");
+        logger.info("");
         Properties p = new Properties();
         p.load(getClass().getResourceAsStream("server.properties"));
         String port = p.getProperty("port", "3333");
@@ -20,7 +20,7 @@ public class ServerActivator implements BundleActivator {
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        logger.info("server stops");
+        logger.info("");
     }
 
 }

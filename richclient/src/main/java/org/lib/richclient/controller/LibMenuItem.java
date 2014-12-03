@@ -7,10 +7,6 @@ package org.lib.richclient.controller;
 
 import javafx.scene.control.MenuItem;
 
-/**
- *
- * @author danecek
- */
 public class LibMenuItem extends MenuItem implements Disable {
 
     public LibMenuItem(String string) {

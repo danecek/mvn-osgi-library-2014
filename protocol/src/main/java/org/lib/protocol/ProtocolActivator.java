@@ -6,16 +6,26 @@ import org.osgi.framework.BundleContext;
 
 public class ProtocolActivator implements BundleActivator {
 
-    static Logger logger = Logger.getLogger(ProtocolActivator.class.getSimpleName());
+    private static BundleContext context;
+
+    static final Logger logger = Logger.getGlobal();
+
+    /**
+     * @return the context
+     */
+    public static BundleContext getContext() {
+        return context;
+    }
 
     @Override
     public void start(BundleContext context) throws Exception {
-        logger.info("protocol starts");
+        logger.info("");
+        ProtocolActivator.context = context;
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        logger.info("protocol stops");
+        logger.info("");
     }
 
 }

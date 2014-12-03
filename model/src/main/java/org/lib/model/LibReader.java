@@ -5,13 +5,16 @@
  */
 package org.lib.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author danecek
  */
-public class LibReader {
+public class LibReader implements Serializable {
+
     LibReaderId id;
     String name;
     Address address;
-    
+
 }

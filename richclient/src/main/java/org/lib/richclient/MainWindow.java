@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.lib.richclient.controller.AddBookAction;
 import org.lib.richclient.controller.DeleteBooksAction;
+import org.lib.richclient.controller.LibMenuBar;
+import org.lib.richclient.controller.LibToolBar;
 import static org.lib.utils.Messages.Library;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -29,52 +31,75 @@ import org.osgi.framework.launch.Framework;
  */
 public class MainWindow extends Stage {
 
-    private static MainWindow instance;
+    public static MainWindow instance = new MainWindow();
 
-    /**
-     * @return the instance
-     */
-    public static MainWindow getInstance() {
-        return instance;
-    }
+    private BundleContext context;
 
-    private MenuBar createMenubar() {
-        MenuBar mb = new MenuBar();
-        mb.getMenus().addAll(new BookMenu());
-        return mb;
-    }
+    private final LibToolBar libToolBar = new LibToolBar();
+    private final MenuBar libMenuBar = new LibMenuBar();
 
-    private ToolBar createToolbar() {
-        ToolBar hbox = new ToolBar(AddBookAction.INSTANCE.createButton(),
-                DeleteBooksAction.INSTANCE.createButton());
-        hbox.setPadding(new Insets(2));//;Style("-fx-border-color: red;");
-        return hbox;
-    }
-
-    public MainWindow(BundleContext context) {
-        instance = this;
+//    private MenuBar createMenubar() {
+//        MenuBar mb = new MenuBar();
+//        mb.getMenus().addAll(new BookMenu());
+//        return mb;
+//    }
+//
+//    private ToolBar createToolbar() {
+//        ToolBar hbox = new ToolBar(AddBookAction.instance.createButton(),
+//                DeleteBooksAction.instance.createButton());
+//        hbox.setPadding(new Insets(2));//;Style("-fx-border-color: red;");
+//        return hbox;
+//    }
+    public MainWindow() {
         setOnCloseRequest(new EventHandler<WindowEvent>() {
 
             @Override
             public void handle(WindowEvent t) {
-                Framework f = (Framework) context.getBundle(0);
+                Framework f = (Framework) getContext().getBundle(0);
                 try {
                     f.stop();
                     f.waitForStop(3000);
                 } catch (BundleException | InterruptedException ex) {
                     Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         });
         this.setTitle(Library.createMessage());
         SplitPane splitPane = new SplitPane();
         splitPane.getItems().addAll(new BookPanel());
-        VBox vb = new VBox(createMenubar(), createToolbar(), splitPane);
+        VBox vb = new VBox(libMenuBar, libToolBar, splitPane);
         Scene s = new Scene(vb, 800, 600);
         this.setScene(s);
         this.centerOnScreen();
         this.show();
+    }
+
+    /**
+     * @return the context
+     */
+    public BundleContext getContext() {
+        return context;
+    }
+
+    /**
+     * @param context the context to set
+     */
+    public void setContext(BundleContext context) {
+        this.context = context;
+    }
+
+    /**
+     * @return the libToolBar
+     */
+    public LibToolBar getLibToolBar() {
+        return libToolBar;
+    }
+
+    /**
+     * @return the libMenuBar
+     */
+    public MenuBar getLibMenuBar() {
+        return libMenuBar;
     }
 
 }

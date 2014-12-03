@@ -6,14 +6,16 @@ import org.osgi.framework.BundleContext;
 
 public class UtilsActivator implements BundleActivator {
 
+    static final Logger logger = Logger.getGlobal();
+
     @Override
     public void start(BundleContext context) throws Exception {
-        Logger.getLogger(getClass().getSimpleName()).info("start");
+        logger.info("");
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        Logger.getLogger(getClass().getSimpleName()).info("stop");
+        logger.info("");
     }
 
 }

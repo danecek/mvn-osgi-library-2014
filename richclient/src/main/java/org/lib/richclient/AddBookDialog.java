@@ -5,8 +5,6 @@
  */
 package org.lib.richclient;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import org.lib.business.LibraryFacade;
+import org.lib.richclient.controller.ActionState;
 import org.lib.richclient.controller.LibTextField;
 import org.lib.richclient.controller.Validator;
 import org.lib.utils.LibraryException;
@@ -29,18 +28,19 @@ public final class AddBookDialog extends AbstractLibDialog implements Validator 
 
     @Override
     public boolean validate() {
-        boolean ok = true;
-        String err = "";
         if (title.getText() == null || title.getText().isEmpty()) {
-            err = "empty title";
-            ok = false;
-        } else if (author.getText() == null || author.getText().isEmpty()) {
-            err = "empty author";
-            ok = false;
+            errorMessage.setText("empty title");
+            getOkButon().setDisable(true);
+            return false;
         }
-        errorMessage.setText(err);
-        getOkButon().setDisable(!ok);
-        return ok;
+        if (author.getText() == null || author.getText().isEmpty()) {
+            errorMessage.setText("empty author");
+            getOkButon().setDisable(true);
+            return false;
+        }
+        errorMessage.setText("");
+        getOkButon().setDisable(false);
+        return true;
     }
 
     @Override
@@ -60,8 +60,14 @@ public final class AddBookDialog extends AbstractLibDialog implements Validator 
 
     public AddBookDialog() {
         super("Add Book"); // todo
+        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
-
+            @Override
+            public void handle(ActionEvent t) {
+                hide();
+            }
+        });
+        validate();
         getOkButon().setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
@@ -69,15 +75,15 @@ public final class AddBookDialog extends AbstractLibDialog implements Validator 
                 if (validate()) {
                     try {
                         LibraryFacade.getInstance().createBook(title.getText(), author.getText());
-                        DataState.INSTANCE.invalidate();
+                        DataState.instance.invalidate();
+                        ActionState.instance.fire();
                         hide();
                     } catch (LibraryException ex) {
-                        Logger.getLogger(AddBookDialog.class.getName()).log(Level.SEVERE, null, ex);
+                        new MessageDialog(ex.getMessage());
                     }
                 }
             }
         });
-        validate();
     }
 
 }

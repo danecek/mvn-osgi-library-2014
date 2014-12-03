@@ -6,31 +6,30 @@
 package org.lib.protocol;
 
 import org.lib.business.LibraryFacade;
+import org.lib.model.BookId;
 import org.lib.utils.LibraryException;
 
 /**
  *
  * @author danecek
  */
-public class CreateBook extends AbstractCommand<String> {
+public class DeleteBook extends AbstractCommand<String> {
 
-    private final String title;
-    private final String author;
+    private final BookId id;
 
-    public CreateBook(String title, String author) {
-        this.title = title;
-        this.author = author;
+    public DeleteBook(BookId id) {
+        this.id = id;
     }
 
     @Override
     public String execute(LibraryFacade f) throws LibraryException {
-        f.createBook(title, author);
+        f.deleteBook(id);
         return OK;
     }
 
     @Override
     public String toString() {
-        return "CreateBook{" + title + ", " + author + '}';
+        return "DeleteBook{" + id + '}';
     }
 
 }

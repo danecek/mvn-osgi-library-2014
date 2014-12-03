@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lib.richclient.controller;
+package org.lib.connection;
 
 import javafx.event.ActionEvent;
-import org.lib.richclient.AddBookDialog;
+import org.lib.richclient.controller.LibraryAction;
 
-public class AddBookAction extends LibraryAction {
+public class ConnectAction extends LibraryAction {
 
-    public static final AddBookAction instance = new AddBookAction();
+    public static final ConnectAction instance = new ConnectAction();
 
-    public AddBookAction() {
-        super("Add Book"); // todo
+    public ConnectAction() {
+        super("Connect");
     }
 
     @Override
     public void handle(ActionEvent t) {
-        new AddBookDialog().show();
+        new ConnectDialog().show();
     }
 
     @Override
     protected boolean feasible() {
-        return true;
+        return !Connection.instance.isConnected();
     }
 
 }

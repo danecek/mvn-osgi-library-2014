@@ -1,7 +1,9 @@
 package org.lib.model;
 
+import java.io.Serializable;
+
 public abstract class AbstractId<T extends AbstractId>
-        implements Comparable<T> {
+        implements Comparable<T>, Serializable {
 
     private final int id;
 
@@ -39,7 +41,5 @@ public abstract class AbstractId<T extends AbstractId>
     public String toString() {
         return Integer.toString(id);
     }
-    
-    
 
 }

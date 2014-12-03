@@ -20,8 +20,8 @@
         <module>connection</module>
         <module>protocol</module>
         <module>proxy</module>
-    <module>server</module>
-  </modules>
+        <module>server</module>
+    </modules>
     
     <dependencyManagement>
         <dependencies>
@@ -49,6 +49,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>business</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>connection</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

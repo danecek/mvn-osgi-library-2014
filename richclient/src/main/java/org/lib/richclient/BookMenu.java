@@ -13,7 +13,10 @@ public class BookMenu extends Menu {
 
     public BookMenu() {
         super("Books");  // todo lok
-        getItems().addAll(AddBookAction.INSTANCE.createMenuItem(), DeleteBooksAction.INSTANCE.createMenuItem());
+        getItems().addAll(AddBookAction.instance.createMenuItem(),
+                          DeleteBooksAction.instance.createMenuItem()
+                         // ConnectAction.instance.createMenuItem()
+        );
     }
 
 }

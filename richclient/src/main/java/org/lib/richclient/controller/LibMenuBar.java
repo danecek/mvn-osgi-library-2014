@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lib.model;
+package org.lib.richclient.controller;
 
-import java.io.Serializable;
+import javafx.scene.control.MenuBar;
+import org.lib.richclient.BookMenu;
 
 /**
  *
  * @author danecek
  */
-public class Address implements Serializable {
+public class LibMenuBar extends MenuBar {
 
-    String address;
-
-    public Address(String address) {
-        this.address = address;
+    public LibMenuBar() {
+        getMenus().addAll(new BookMenu());
     }
+
 }

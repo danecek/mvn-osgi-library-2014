@@ -13,52 +13,50 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.lib.richclient.controller.Validator;
 
 /**
  *
  * @author danecek
  */
-public abstract class AbstractLibDialog extends Stage implements Validator {
+public class MessageDialog extends Stage {
 
-    Button cancelButton = new Button("Cancel");
     Button okButton = new Button("OK");
-    protected Text errorMessage = new Text();
+    Text errorMessage = new Text();
 
-    public AbstractLibDialog(String title) {
+    public MessageDialog(String title) {
+        errorMessage.setWrappingWidth(400);
+        errorMessage.setText(title);
         errorMessage.setStyle("-fx-fill: red");
-        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+        okButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
                 hide();
             }
         });
-        setTitle(title);
+        setTitle("Message");
         setAlwaysOnTop(true);
         setResizable(false);
         centerOnScreen();
         initOwner(MainWindow.instance);
         initModality(Modality.APPLICATION_MODAL);
-        VBox vbox = new VBox(createInterior(), createButtonbox(), errorMessage);
-        vbox.setPadding(new Insets(10));
-        Scene s = new Scene(vbox);
+        errorMessage.setTextAlignment(TextAlignment.CENTER);
+        VBox v = new VBox(new StackPane(errorMessage), createButtonbox());
+        v.setPadding(new Insets(10));
+       // v.set
+        Scene s = new Scene(v);
         setScene(s);
         show();
     }
 
-    protected Button getOkButon() {
-        return okButton;
-    }
-
-    protected abstract Node createInterior();
-
-    protected HBox createButtonbox() {
-        HBox buttons = new HBox(getOkButon(), cancelButton);
+    private HBox createButtonbox() {
+        HBox buttons = new HBox(okButton);
         buttons.setSpacing(10);
         buttons.setAlignment(Pos.BASELINE_RIGHT);
         return buttons;

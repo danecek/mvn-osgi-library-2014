@@ -6,6 +6,7 @@
 package org.lib.richclient.controller;
 
 import javafx.event.ActionEvent;
+import org.lib.richclient.BookPanel;
 import org.lib.richclient.DeleteBooksDialog;
 
 /**
@@ -14,7 +15,7 @@ import org.lib.richclient.DeleteBooksDialog;
  */
 public class DeleteBooksAction extends LibraryAction {
 
-    public static final DeleteBooksAction INSTANCE = new DeleteBooksAction();
+    public static final DeleteBooksAction instance = new DeleteBooksAction();
 
     public DeleteBooksAction() {
         super("Delete Books"); // todo
@@ -23,6 +24,11 @@ public class DeleteBooksAction extends LibraryAction {
     @Override
     public void handle(ActionEvent t) {
         new DeleteBooksDialog().show();
+    }
+
+    @Override
+    protected boolean feasible() {
+        return !BookPanel.instance.getSelected().isEmpty();
     }
 
 }

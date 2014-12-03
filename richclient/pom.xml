@@ -34,14 +34,12 @@
                 <configuration>
                     <instructions>
                         <Bundle-Activator>org.lib.richclient.RichClientActivator</Bundle-Activator>
-                        <Export-Package />
+                        <Export-Package >org.lib.richclient,org.lib.richclient.controller</Export-Package>
+                        <Private-Package>org.lib.richclient.*</Private-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+
 </project>

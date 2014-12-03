@@ -16,6 +16,11 @@ import javafx.scene.control.TextField;
 public class LibTextField extends TextField {
 
     public LibTextField(Validator validator) {
+        this("", validator);
+    }
+
+    public LibTextField(String text, Validator validator) {
+        super(text);
         this.textProperty().addListener(new ChangeListener<String>() {
 
             @Override

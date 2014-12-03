@@ -20,18 +20,26 @@ import org.osgi.util.tracker.ServiceTracker;
 public abstract class LibraryFacade {
 
     private static LibraryFacade instance;
-    static ServiceTracker<Object, Object> st;
+    private static ServiceTracker<LibraryFacade, LibraryFacade> st;
 
     /**
      * @return the instance
      */
     public static LibraryFacade getInstance() {
         if (instance == null) {
-            instance = (LibraryFacade) st.getService();
-            if (instance == null)
-               instance = new DefaultLibraryFacade();
+            instance = st.getService();
+            if (instance == null) {
+                instance = new DefaultLibraryFacade();
+            }
         }
         return instance;
+    }
+
+    /**
+     * @param aSt the st to set
+     */
+    public static void setSt(ServiceTracker<LibraryFacade, LibraryFacade> aSt) {
+        st = aSt;
     }
 
     public abstract void createBook(String title, String author) throws LibraryException;

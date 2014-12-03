@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.lib.business.LibraryFacade;
 import org.lib.model.Book;
 import org.lib.model.BookId;
+import org.lib.richclient.controller.ActionState;
 import org.lib.utils.LibraryException;
 
 /**
@@ -41,7 +42,7 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
     ObservableList<Book> data = FXCollections.observableArrayList();
 
     private TableView<Book> createTable() {
-        TableView<Book> tab = new TableView<Book>();
+        TableView<Book> tab = new TableView<>();
         TableColumn<Book, BookId> idCol = new TableColumn<>("Id");  // todo lok
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Book, BookId> titleCol = new TableColumn<>("Title");  // todo lok
@@ -50,6 +51,13 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
         authorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
         tab.getColumns().addAll(idCol, titleCol, authorCol);
         tab.setItems(data);
+        tab.getSelectionModel().getSelectedCells().addListener(new InvalidationListener() {
+
+            @Override
+            public void invalidated(Observable observable) {
+                ActionState.instance.fire();
+            }
+        });
         return tab;
     }
 
@@ -59,7 +67,7 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
         instance = this;
         setText("Books"); //todo
         setContent(table = createTable());
-        DataState.INSTANCE.addListener(this);
+        DataState.instance.addListener(this);
         getChildren().addAll(createTitle(), table);
         invalidated(null);
     }
@@ -76,7 +84,7 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
             Collection<Book> books = LibraryFacade.getInstance().getAllBooks();
             data.addAll(books);
         } catch (LibraryException ex) {
-            Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
+            new MessageDialog(ex.getMessage());
         }
     }
 

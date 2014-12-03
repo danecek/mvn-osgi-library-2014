@@ -31,7 +31,7 @@ public class DerbyBookDAO implements BookDAO {
     public DerbyBookDAO(Connection connection) {
         try {
             createPs = connection.prepareStatement("INSERT INTO BOOKS VALUES(DEFAULT, ?, ?)");
-//            deletePS = connection.prepareStatement("DELETE FROM BOOKS WHERE ID = ?");
+            deletePs = connection.prepareStatement("DELETE FROM BOOKS WHERE ID = ?");
             getAllPs = connection.prepareStatement("SELECT * FROM BOOKS");
         } catch (SQLException ex) {
             Logger.getLogger(DerbyBookDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,6 +70,12 @@ public class DerbyBookDAO implements BookDAO {
 
     @Override
     public void delete(BookId id) throws LibraryException {
+        try {
+            deletePs.setInt(1, id.getId());
+            deletePs.executeUpdate();
+        } catch (SQLException ex) {
+            throw new LibraryException(ex);
+        }
 
     }
 

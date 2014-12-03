@@ -12,6 +12,7 @@ import org.lib.model.Book;
 import org.lib.model.BookId;
 import org.lib.model.LibReaderId;
 import org.lib.protocol.CreateBook;
+import org.lib.protocol.DeleteBook;
 import org.lib.protocol.GetAllBooks;
 import org.lib.utils.LibraryException;
 
@@ -40,7 +41,7 @@ public class LibraryFacadeProxy extends LibraryFacade {
 
     @Override
     public void deleteBook(BookId id) throws LibraryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection.instance.send(new DeleteBook(id));
     }
     
 }

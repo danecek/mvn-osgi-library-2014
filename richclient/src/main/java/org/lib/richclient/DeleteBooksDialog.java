@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import org.lib.business.LibraryFacade;
 import org.lib.model.Book;
+import org.lib.richclient.controller.ActionState;
 import org.lib.richclient.controller.Validator;
 import org.lib.utils.LibraryException;
 
@@ -43,10 +44,11 @@ public final class DeleteBooksDialog extends AbstractLibDialog implements Valida
                     for (Book b : BookPanel.instance.getSelected()) {
                         LibraryFacade.getInstance().deleteBook(b.getId());
                     }
-                    DataState.INSTANCE.invalidate();
+                    DataState.instance.invalidate();
+                    ActionState.instance.fire();
                     hide();
                 } catch (LibraryException ex) {
-                    Logger.getLogger(DeleteBooksDialog.class.getName()).log(Level.SEVERE, null, ex);
+                    new MessageDialog(ex.getMessage());
                 }
             }
         });

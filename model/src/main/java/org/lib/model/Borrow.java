@@ -5,11 +5,13 @@
  */
 package org.lib.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author danecek
  */
-public class Borrow {
+public class Borrow implements Serializable {
 
     private final BookId bookId;
     private final LibReaderId readerId;
