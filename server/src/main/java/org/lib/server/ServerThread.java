@@ -20,10 +20,6 @@ import java.util.logging.Logger;
 import org.lib.business.LibraryFacade;
 import org.lib.business.LibraryFacadeInterface;
 
-/**
- *
- * @author danecek
- */
 public class ServerThread implements Runnable {
 
     static Lock lock = new ReentrantLock();
