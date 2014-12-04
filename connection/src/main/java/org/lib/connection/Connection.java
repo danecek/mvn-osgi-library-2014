@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import org.lib.protocol.AbstractCommand;
 import org.lib.protocol.Logout;
 import org.lib.protocol.ProtocolActivator;
-import org.lib.richclient.MessageDialog;
 import org.lib.richclient.controller.ActionState;
 import org.lib.utils.LibraryException;
 
@@ -26,19 +25,19 @@ import org.lib.utils.LibraryException;
  */
 public class Connection {
 
-    static class MyObjectInputStream extends ObjectInputStream {
-
-        @Override
-        public Class resolveClass(ObjectStreamClass desc) throws IOException,
-                ClassNotFoundException {
-            return ProtocolActivator.getContext().getBundle().loadClass(desc.getName());
-        }
-
-        public MyObjectInputStream(InputStream in) throws IOException {
-            super(in);
-        }
-
-    }
+//    static class MyObjectInputStream extends ObjectInputStream {
+//
+//        @Override
+//        public Class resolveClass(ObjectStreamClass desc) throws IOException,
+//                ClassNotFoundException {
+//            return ProtocolActivator.getContext().getBundle().loadClass(desc.getName());
+//        }
+//
+//        public MyObjectInputStream(InputStream in) throws IOException {
+//            super(in);
+//        }
+//
+//    }
     ObjectInputStream ois;
     ObjectOutputStream oos;
     private Socket socket;
@@ -51,7 +50,7 @@ public class Connection {
         }
         socket = new Socket(host, port);
         socket.setSoTimeout(2000);
-        ois = new MyObjectInputStream(socket.getInputStream());
+        ois = new ObjectInputStream(socket.getInputStream());
         oos = new ObjectOutputStream(socket.getOutputStream());
         ActionState.instance.fire();
     }

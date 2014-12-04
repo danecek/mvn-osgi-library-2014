@@ -7,6 +7,7 @@ package org.lib.protocol;
 
 import java.util.Collection;
 import org.lib.business.LibraryFacade;
+import org.lib.business.LibraryFacadeInterface;
 import org.lib.model.Book;
 import org.lib.utils.LibraryException;
 
@@ -17,7 +18,7 @@ import org.lib.utils.LibraryException;
 public class GetAllBooks extends AbstractCommand<Collection<Book>> {
 
     @Override
-    public Collection<Book> execute(LibraryFacade f) throws LibraryException {
+    public Collection<Book> execute(LibraryFacadeInterface f) throws LibraryException {
         return f.getAllBooks();
     }
 

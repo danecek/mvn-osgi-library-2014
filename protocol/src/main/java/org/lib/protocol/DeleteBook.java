@@ -6,6 +6,7 @@
 package org.lib.protocol;
 
 import org.lib.business.LibraryFacade;
+import org.lib.business.LibraryFacadeInterface;
 import org.lib.model.BookId;
 import org.lib.utils.LibraryException;
 
@@ -22,7 +23,7 @@ public class DeleteBook extends AbstractCommand<String> {
     }
 
     @Override
-    public String execute(LibraryFacade f) throws LibraryException {
+    public String execute(LibraryFacadeInterface f) throws LibraryException {
         f.deleteBook(id);
         return OK;
     }

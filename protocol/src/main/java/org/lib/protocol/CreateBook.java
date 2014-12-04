@@ -6,6 +6,7 @@
 package org.lib.protocol;
 
 import org.lib.business.LibraryFacade;
+import org.lib.business.LibraryFacadeInterface;
 import org.lib.utils.LibraryException;
 
 /**
@@ -23,7 +24,7 @@ public class CreateBook extends AbstractCommand<String> {
     }
 
     @Override
-    public String execute(LibraryFacade f) throws LibraryException {
+    public String execute(LibraryFacadeInterface f) throws LibraryException {
         f.createBook(title, author);
         return OK;
     }

@@ -47,6 +47,7 @@
                         <Bundle-Activator>org.lib.connection.ConnectionActivator</Bundle-Activator>
                         <Export-Package >org.lib.connection</Export-Package>
                         <Private-Package>org.lib.connection.*</Private-Package>
+                        <Import-Package>org.lib.model,org.lib.protocol,*</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

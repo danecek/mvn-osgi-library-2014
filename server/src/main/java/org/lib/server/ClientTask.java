@@ -13,7 +13,7 @@ import java.io.ObjectStreamClass;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.lib.business.LibraryFacade;
+import org.lib.business.LibraryFacadeInterface;
 import org.lib.protocol.AbstractCommand;
 import org.lib.protocol.Logout;
 import org.lib.protocol.ProtocolActivator;
@@ -23,68 +23,74 @@ import org.lib.utils.LibraryException;
  *
  * @author danecek
  */
-public class ClientThread extends Thread {
+public class ClientTask implements Runnable {
 
-    static class MyObjectInputStream extends ObjectInputStream {
-
-        @Override
-        public Class resolveClass(ObjectStreamClass desc) throws IOException,
-                ClassNotFoundException {
-            return ProtocolActivator.getContext().getBundle().loadClass(desc.getName());
-        }
-
-        public MyObjectInputStream(InputStream in) throws IOException {
-            super(in);
-        }
-
-    }
+//    static class MyObjectInputStream extends ObjectInputStream {
+//
+//        @Override
+//        public Class resolveClass(ObjectStreamClass desc) throws IOException,
+//                ClassNotFoundException {
+//            return ProtocolActivator.getContext().getBundle().loadClass(desc.getName());
+//        }
+//
+//        public MyObjectInputStream(InputStream in) throws IOException {
+//            super(in);
+//        }
+//
+//    }
 
     Socket s;
-    MyObjectInputStream inp;
+    ObjectInputStream inp;
     ObjectOutputStream out;
+    String client;
 
-    static final Logger logger = Logger.getLogger(ClientThread.class.getName());
+//    static Class[] classes = {LibReaderId.class, BookId.class, Book.class,
+//        Address.class, Borrow.class, LibReader.class};
 
-    public ClientThread(Socket s) {
-        super(s.getInetAddress() + ":" + s.getPort());
+    static final Logger logger = Logger.getLogger(ClientTask.class.getName());
+    LibraryFacadeInterface facade;
+
+    public ClientTask(Socket s, LibraryFacadeInterface facade) {
+        this.facade = facade;
+        client = s.getInetAddress() + ":" + s.getPort();
         try {
             this.s = s;
             out = new ObjectOutputStream(s.getOutputStream());
-            inp = new MyObjectInputStream(s.getInputStream());
+            inp = new ObjectInputStream(s.getInputStream());
         } catch (IOException ex) {
-            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     public void run() {
-        logger.log(Level.INFO, "New client: {0}", getName());
+        logger.log(Level.INFO, "New client: {0}", client);
         try (ObjectInputStream linp = inp;
                 ObjectOutputStream lout = out;
                 Socket ls = s) {
             for (;;) {
                 try {
                     AbstractCommand com = (AbstractCommand) linp.readObject();
-                    logger.log(Level.INFO, "{0}: {1}", new Object[]{getName(), com});
+                    logger.log(Level.INFO, "{0}: {1}", new Object[]{client, com});
                     if (com instanceof Logout) {
                         logger.info("Client loggedout");
                         break;
                     }
                     Object result;
                     try {
-                        result = com.execute(LibraryFacade.getInstance());
+                        result = com.execute(facade);//LibraryFacade.getInstance());
                     } catch (LibraryException ex) {
                         result = ex;
                     }
                     lout.writeObject(result);
                     lout.flush();
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ClientTask.class.getName()).log(Level.SEVERE, null, ex);
                     System.exit(1);
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClientTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

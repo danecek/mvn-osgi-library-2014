@@ -5,19 +5,14 @@
  */
 package org.lib.business;
 
-import java.util.Collection;
 import org.lib.business.impl.DefaultLibraryFacade;
-import org.lib.model.Book;
-import org.lib.model.BookId;
-import org.lib.model.LibReaderId;
-import org.lib.utils.LibraryException;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
  *
  * @author danecek
  */
-public abstract class LibraryFacade {
+public abstract class LibraryFacade implements LibraryFacadeInterface {
 
     private static LibraryFacade instance;
     private static ServiceTracker<LibraryFacade, LibraryFacade> st;
@@ -42,12 +37,5 @@ public abstract class LibraryFacade {
         st = aSt;
     }
 
-    public abstract void createBook(String title, String author) throws LibraryException;
-
-    public abstract void borrowBooks(LibReaderId readerId, Collection<BookId> books) throws LibraryException;
-
-    public abstract Collection<Book> getAllBooks() throws LibraryException;
-
-    public abstract void deleteBook(BookId id) throws LibraryException;
 
 }

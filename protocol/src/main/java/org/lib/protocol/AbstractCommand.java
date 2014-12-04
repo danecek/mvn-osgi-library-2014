@@ -7,6 +7,7 @@ package org.lib.protocol;
 
 import java.io.Serializable;
 import org.lib.business.LibraryFacade;
+import org.lib.business.LibraryFacadeInterface;
 import org.lib.utils.LibraryException;
 
 /**
@@ -17,5 +18,5 @@ public abstract class AbstractCommand<T> implements Serializable {
 
     public static final String OK = "ok";
 
-    public abstract T execute(LibraryFacade f) throws LibraryException;
+    public abstract T execute(LibraryFacadeInterface f) throws LibraryException;
 }
