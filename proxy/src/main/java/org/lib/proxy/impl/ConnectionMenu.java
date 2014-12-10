@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lib.connection;
+package org.lib.proxy.impl;
 
+import org.lib.proxy.impl.ConnectAction;
 import javafx.scene.control.Menu;
 
 public class ConnectionMenu extends Menu {

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lib.connection;
+package org.lib.proxy.impl;
 
 import javafx.event.ActionEvent;
+import org.lib.connection.Connection;
 import org.lib.richclient.controller.LibraryAction;
 
 public class ConnectAction extends LibraryAction {

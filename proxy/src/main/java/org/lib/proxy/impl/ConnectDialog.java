@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.lib.connection;
+package org.lib.proxy.impl;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -12,6 +12,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import org.lib.connection.Connection;
 import org.lib.richclient.AbstractLibDialog;
 import org.lib.richclient.DataState;
 import org.lib.richclient.MessageDialog;
