@@ -21,7 +21,9 @@
         <module>protocol</module>
         <module>proxy</module>
         <module>server</module>
-    </modules>
+    <module>connectionNIO</module>
+    <module>serverNIO</module>
+  </modules>
     
     <dependencyManagement>
         <dependencies>

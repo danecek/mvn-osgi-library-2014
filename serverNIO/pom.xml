@@ -8,10 +8,15 @@
     </parent>
 
     <groupId>org.lib</groupId>
-    <artifactId>proxy</artifactId>
+    <artifactId>serverNIO</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
+    <name>serverNIO OSGi Bundle</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -21,17 +26,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>business</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>protocol</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>connectionNIO</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -45,12 +40,13 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>org.lib.proxy.ProxyActivator</Bundle-Activator>
-                        <Export-Package >org.lib.proxy</Export-Package>
-                        <Private-Package>org.lib.proxy.*</Private-Package>
+                        <Bundle-Activator>org.lib.servernio.ServerNIOActivator</Bundle-Activator>
+                        <Export-Package />
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+   
 </project>

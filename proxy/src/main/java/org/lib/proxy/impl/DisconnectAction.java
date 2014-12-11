@@ -6,7 +6,8 @@
 package org.lib.proxy.impl;
 
 import javafx.event.ActionEvent;
-import org.lib.connection.Connection;
+import org.lib.connectionnio.Connection;
+//import org.lib.connection.Connection;
 import org.lib.richclient.controller.LibraryAction;
 
 public class DisconnectAction extends LibraryAction {

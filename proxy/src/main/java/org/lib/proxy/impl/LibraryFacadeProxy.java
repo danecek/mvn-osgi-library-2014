@@ -7,7 +7,8 @@ package org.lib.proxy.impl;
 
 import java.util.Collection;
 import org.lib.business.LibraryFacade;
-import org.lib.connection.Connection;
+import org.lib.connectionnio.Connection;
+//import org.lib.connection.Connection;
 import org.lib.model.Book;
 import org.lib.model.BookId;
 import org.lib.model.LibReaderId;
