@@ -5,7 +5,6 @@
  */
 package org.lib.protocol;
 
-import org.lib.business.LibraryFacade;
 import org.lib.business.LibraryFacadeInterface;
 import org.lib.utils.LibraryException;
 
@@ -13,17 +12,16 @@ import org.lib.utils.LibraryException;
  *
  * @author danecek
  */
-public class Logout extends AbstractCommand<Object>{
+public class Logout extends AbstractCommand<Object> {
 
     @Override
     public Object execute(LibraryFacadeInterface f) throws LibraryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return OK;
     }
 
     @Override
     public String toString() {
         return "Logout{" + '}';
     }
-    
-    
+
 }

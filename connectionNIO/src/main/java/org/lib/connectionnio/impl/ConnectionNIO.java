@@ -112,7 +112,6 @@ public class ConnectionNIO extends Connection {
         }
         socket = null;
         ActionState.instance.fire();
-
     }
 
 }

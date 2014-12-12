@@ -19,7 +19,7 @@ class NioServer implements Runnable {
 
     private final Selector socketSelector;
     static final int COMMAND_BUFF_LEN = 2048;
-    static final Logger logger = Logger.getLogger(NioServer.class.getName());
+    static final Logger LOG = Logger.getLogger(NioServer.class.getName());
     private final ExecutorService threadPool = Executors.newCachedThreadPool();
 
     public NioServer(int port) throws IOException {
@@ -36,9 +36,8 @@ class NioServer implements Runnable {
     public void run() {
         while (true) {
             try {
-                logger.info("waiting for client or command");
+                LOG.info("waiting for client or command");
                 int n = socketSelector.select();
-                logger.info(n + " selected keys");
                 Iterator<SelectionKey> selectedKeys
                         = socketSelector.selectedKeys().iterator();
                 while (selectedKeys.hasNext()) {
@@ -54,7 +53,7 @@ class NioServer implements Runnable {
                     }
                 }
             } catch (Exception e) {
-                logger.log(Level.SEVERE, null, e);
+                LOG.log(Level.SEVERE, null, e);
             }
         }
 
@@ -67,14 +66,13 @@ class NioServer implements Runnable {
         socketChannel.configureBlocking(false);
         socketChannel.register(socketSelector,
                 SelectionKey.OP_READ);
-        logger.info("accepted channel: " + socketChannel);
+        LOG.info("accepted channel: " + socketChannel);
     }
 
     private void read(SelectionKey key) throws IOException {
-        logger.info("read: " + key);
         SocketChannel socketChannel
                 = (SocketChannel) key.channel();
-        logger.info("read channel: " + socketChannel);
+        LOG.info("read channel: " + socketChannel);
         ByteBuffer readBuffer = (ByteBuffer) (key.attachment());
         if (readBuffer == null) {
             readBuffer = ByteBuffer.allocate(COMMAND_BUFF_LEN);
@@ -84,9 +82,8 @@ class NioServer implements Runnable {
         int numRead;
         try {
             numRead = socketChannel.read(readBuffer);
-            //      logger.info("read Buffer: " + readBuffer.toString());
         } catch (IOException e) {
-            logger.info(e.toString());
+            LOG.info(e.toString());
 // The remote forcibly closed the connection, 
             socketChannel.close();
             key.cancel();
@@ -102,7 +99,6 @@ class NioServer implements Runnable {
         if (commandLength >= COMMAND_BUFF_LEN - 2) {
             throw new RuntimeException("commandLength >= COMMAND_BUFF_LEN - 2");
         }
-        //       logger.info("command length: " + reqLength);
         if (commandLength > readBuffer.position()) {
             return; // zpráva není celá
         }
@@ -111,9 +107,8 @@ class NioServer implements Runnable {
                 = Arrays.copyOfRange(readBuffer.array(), 2, 2 + commandLength);
         readBuffer.position(2 + commandLength);
         readBuffer.compact();
-        //       logger.info("compacted Buffer: " + readBuffer.toString());
-        // threadPool.execute(new ClientTask(req, socketChannel));
-        new ClientTask(req, socketChannel).run();
+        threadPool.execute(new ClientTask(req, socketChannel));
+        // new ClientTask(req, socketChannel).run();
     }
 
 }

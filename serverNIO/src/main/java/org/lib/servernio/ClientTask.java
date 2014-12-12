@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lib.business.LibraryFacade;
 import org.lib.protocol.AbstractCommand;
+import org.lib.protocol.Logout;
 import org.lib.utils.LibraryException;
 import org.lib.utils.Marshaller;
 
@@ -36,8 +37,9 @@ public class ClientTask implements Runnable {
     public void run() {
         try {
             Object result;
+            AbstractCommand comm = null;
             try {
-                AbstractCommand comm = (AbstractCommand) Marshaller.bytes2Object(commBytes);
+                comm = (AbstractCommand) Marshaller.bytes2Object(commBytes);
                 LOG.info(comm.toString());
                 result = comm.execute(LibraryFacade.getInstance());
             } catch (LibraryException ex) {
@@ -52,6 +54,9 @@ public class ClientTask implements Runnable {
             writeBuff.flip();
             //       LOG.info(writeBuff.toString());
             socketChannel.write(writeBuff);
+            if (comm instanceof Logout) {
+                socketChannel.close();
+            }
         } catch (IOException ex) {
             Logger.getLogger(ClientTask.class.getName()).log(Level.SEVERE, null, ex);
         }

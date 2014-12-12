@@ -5,7 +5,6 @@
  */
 package org.lib.protocol;
 
-import org.lib.business.LibraryFacade;
 import org.lib.business.LibraryFacadeInterface;
 import org.lib.utils.LibraryException;
 
