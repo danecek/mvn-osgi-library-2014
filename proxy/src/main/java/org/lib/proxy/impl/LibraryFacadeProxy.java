@@ -7,8 +7,7 @@ package org.lib.proxy.impl;
 
 import java.util.Collection;
 import org.lib.business.LibraryFacade;
-import org.lib.connectionnio.Connection;
-//import org.lib.connection.Connection;
+import org.lib.connection.Connection;
 import org.lib.model.Book;
 import org.lib.model.BookId;
 import org.lib.model.LibReaderId;
@@ -26,12 +25,12 @@ public class LibraryFacadeProxy extends LibraryFacade {
     @Override
     public void createBook(String title, String author) throws LibraryException {
         CreateBook cb = new CreateBook(title, author);
-        Connection.instance.send(cb);
+        Connection.getInstance().send(cb);
     }
 
     @Override
     public Collection<Book> getAllBooks() throws LibraryException {
-        return Connection.instance.send(new GetAllBooks());
+        return Connection.getInstance().send(new GetAllBooks());
     }
     
     @Override
@@ -42,7 +41,7 @@ public class LibraryFacadeProxy extends LibraryFacade {
 
     @Override
     public void deleteBook(BookId id) throws LibraryException {
-        Connection.instance.send(new DeleteBook(id));
+         Connection.getInstance().send(new DeleteBook(id));
     }
     
 }

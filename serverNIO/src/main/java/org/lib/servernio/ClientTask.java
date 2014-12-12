@@ -5,19 +5,15 @@
  */
 package org.lib.servernio;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lib.business.LibraryFacade;
 import org.lib.protocol.AbstractCommand;
 import org.lib.utils.LibraryException;
+import org.lib.utils.Marshaller;
 
 /**
  *
@@ -25,8 +21,11 @@ import org.lib.utils.LibraryException;
  */
 public class ClientTask implements Runnable {
 
-    byte[] commBytes;
-    SocketChannel socketChannel;
+    private static final Logger LOG = Logger.getLogger(ClientTask.class.getName());
+    static final int RESULT_BUFF_LEN = 8196;
+
+    private final byte[] commBytes;
+    private final SocketChannel socketChannel;
 
     public ClientTask(byte[] commBytes, SocketChannel socketChannel) {
         this.commBytes = commBytes;
@@ -35,33 +34,23 @@ public class ClientTask implements Runnable {
 
     @Override
     public void run() {
-        ObjectInputStream ois = null;
-        ByteBuffer writeBuff = null;
-        ByteArrayOutputStream baos = null;
-        Object result = null;
-        ObjectOutputStream oos = null;
         try {
-            ois = new ObjectInputStream(new ByteArrayInputStream(commBytes));
-            AbstractCommand comm = (AbstractCommand) ois.readObject();
-            result = comm.execute(LibraryFacade.getInstance());
-            writeBuff = ByteBuffer.allocate(10000);
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(ClientTask.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LibraryException ex) {
-            result = ex;
-        } finally {
+            Object result;
             try {
-                ois.close();
-            } catch (IOException ex) {
+                AbstractCommand comm = (AbstractCommand) Marshaller.bytes2Object(commBytes);
+                LOG.info(comm.toString());
+                result = comm.execute(LibraryFacade.getInstance());
+            } catch (LibraryException ex) {
                 Logger.getLogger(ClientTask.class.getName()).log(Level.SEVERE, null, ex);
+                result = ex;
             }
-        }
-        try {
-            oos.writeObject(result);
-            writeBuff.put(baos.toByteArray());
-            writeBuff.compact();
+            //         LOG.info(result.toString());
+            byte[] resultBytes = Marshaller.obj2Bytes(result);
+            ByteBuffer writeBuff = ByteBuffer.allocate(resultBytes.length + 2);
+            writeBuff.putShort((short) resultBytes.length);
+            writeBuff.put(resultBytes);
+            writeBuff.flip();
+            //       LOG.info(writeBuff.toString());
             socketChannel.write(writeBuff);
         } catch (IOException ex) {
             Logger.getLogger(ClientTask.class.getName()).log(Level.SEVERE, null, ex);

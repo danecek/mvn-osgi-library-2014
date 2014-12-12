@@ -5,7 +5,6 @@
  */
 package org.lib.proxy.impl;
 
-import org.lib.proxy.impl.ConnectAction;
 import javafx.scene.control.Menu;
 
 public class ConnectionMenu extends Menu {

@@ -12,12 +12,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
-    <name>serverNIO OSGi Bundle</name>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -42,6 +36,7 @@
                     <instructions>
                         <Bundle-Activator>org.lib.servernio.ServerNIOActivator</Bundle-Activator>
                         <Export-Package />
+                        <Import-Package>org.lib.model,org.lib.protocol,*</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

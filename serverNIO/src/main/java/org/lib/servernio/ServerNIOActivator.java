@@ -7,16 +7,17 @@ import org.osgi.framework.BundleContext;
 
 public class ServerNIOActivator implements BundleActivator {
 
-    Logger logger = Logger.getLogger(ServerNIOActivator.class.getName());
+    static final Logger logger = Logger.getLogger(ServerNIOActivator.class.getName());
 
+    @Override
     public void start(BundleContext context) throws Exception {
         logger.info("");
         Executors.newCachedThreadPool().execute(new NioServer(3333));
     }
 
+    @Override
     public void stop(BundleContext context) throws Exception {
         logger.info("");
-        // TODO add deactivation code here
     }
 
 }

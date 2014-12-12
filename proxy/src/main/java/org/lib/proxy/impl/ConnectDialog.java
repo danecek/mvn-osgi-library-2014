@@ -6,18 +6,18 @@
 package org.lib.proxy.impl;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import org.lib.connectionnio.Connection;
-//import org.lib.connection.Connection;
+import org.lib.connection.Connection;
 import org.lib.richclient.AbstractLibDialog;
 import org.lib.richclient.DataState;
 import org.lib.richclient.MessageDialog;
-//import org.lib.connection.Connection;
 import org.lib.richclient.controller.LibTextField;
 import org.lib.richclient.controller.Validator;
 
@@ -75,12 +75,12 @@ public final class ConnectDialog extends AbstractLibDialog implements Validator 
             public void handle(ActionEvent t) {
                 if (validate()) {
                     try {
-                        Connection.instance.connect(host.getText(), Integer.parseInt(port.getText()));
+                        Connection.getInstance().connect(host.getText(), Integer.parseInt(port.getText()));
                         DataState.instance.invalidate();
-                        hide();
                     } catch (IOException ex) {
                         new MessageDialog(ex.toString());
                     }
+                    hide();
                 }
             }
         });

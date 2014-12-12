@@ -2,8 +2,10 @@ package org.lib.connection;
 
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import org.lib.connection.impl.ConnectionImpl;  
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
 
 public class ConnectionActivator implements BundleActivator {
 
@@ -14,8 +16,9 @@ public class ConnectionActivator implements BundleActivator {
     @Override
     public void start(BundleContext context) throws Exception {
         logger.info("");
-        ConnectionActivator.context = context;
-        System.out.println("@@@@@@@@@@@@@@@@@@" + context.getProperty("port"));
+        ServiceTracker<Connection, Connection> st = new ServiceTracker(context, Connection.class.getName(), null);
+        st.open();
+        Connection.setSt(st);
     }
 
     @Override
@@ -25,7 +28,7 @@ public class ConnectionActivator implements BundleActivator {
 
             @Override
             public void run() {
-                Connection.instance.disconnect();
+                ConnectionImpl.getInstance().disconnect();
             }
         });
     }

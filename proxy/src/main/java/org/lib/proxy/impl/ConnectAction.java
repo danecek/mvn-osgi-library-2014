@@ -6,9 +6,9 @@
 package org.lib.proxy.impl;
 
 import javafx.event.ActionEvent;
-import org.lib.connectionnio.Connection;
-//import org.lib.connection.Connection;
+import org.lib.connection.Connection;
 import org.lib.richclient.controller.LibraryAction;
+
 
 public class ConnectAction extends LibraryAction {
 
@@ -25,7 +25,7 @@ public class ConnectAction extends LibraryAction {
 
     @Override
     protected boolean feasible() {
-        return !Connection.instance.isConnected();
+        return !Connection.getInstance().isConnected();
     }
 
 }

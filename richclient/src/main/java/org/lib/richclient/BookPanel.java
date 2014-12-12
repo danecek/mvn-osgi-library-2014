@@ -6,13 +6,12 @@
 package org.lib.richclient;
 
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TitledPane;
@@ -28,9 +27,9 @@ import org.lib.utils.LibraryException;
  * @author danecek
  */
 public final class BookPanel extends TitledPane implements InvalidationListener {
-
+    
     public static BookPanel instance;
-
+    
     private Label createTitle() {
         Label title = new Label("Books");
         title.setStyle("-fx-font: 16px \"Serif\";\n"
@@ -38,11 +37,12 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
                 + "    -fx-background-color: #CCFF99;");
         return title;
     }
-
+    
     ObservableList<Book> data = FXCollections.observableArrayList();
-
+    
     private TableView<Book> createTable() {
         TableView<Book> tab = new TableView<>();
+        tab.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         TableColumn<Book, BookId> idCol = new TableColumn<>("Id");  // todo lok
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         TableColumn<Book, BookId> titleCol = new TableColumn<>("Title");  // todo lok
@@ -52,7 +52,7 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
         tab.getColumns().addAll(idCol, titleCol, authorCol);
         tab.setItems(data);
         tab.getSelectionModel().getSelectedCells().addListener(new InvalidationListener() {
-
+            
             @Override
             public void invalidated(Observable observable) {
                 ActionState.instance.fire();
@@ -60,9 +60,9 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
         });
         return tab;
     }
-
+    
     TableView<Book> table;
-
+    
     public BookPanel() {
         instance = this;
         setText("Books"); //todo
@@ -71,14 +71,15 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
         getChildren().addAll(createTitle(), table);
         invalidated(null);
     }
-
+    
     public ObservableList<Book> getSelected() {
         ObservableList<Book> selected = table.getSelectionModel().getSelectedItems();
         return selected;
     }
-
+    
     @Override
     public void invalidated(Observable o) {
+        
         data.clear();
         try {
             Collection<Book> books = LibraryFacade.getInstance().getAllBooks();
@@ -87,5 +88,5 @@ public final class BookPanel extends TitledPane implements InvalidationListener 
             new MessageDialog(ex.getMessage());
         }
     }
-
+    
 }

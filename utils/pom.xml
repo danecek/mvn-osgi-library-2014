@@ -32,6 +32,7 @@
                         <Bundle-Activator>org.lib.utils.UtilsActivator</Bundle-Activator>
                         <Export-Package >org.lib.utils</Export-Package>
                         <Private-Package>org.lib.utils.*</Private-Package>
+                        <Import-Package>org.lib.model,org.lib.protocol,*</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
