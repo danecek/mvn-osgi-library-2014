@@ -14,8 +14,8 @@ import org.osgi.util.tracker.ServiceTracker;
  */
 public abstract class AbstractDAOFactory {
 
-    private static AbstractDAOFactory instance;
-    private static ServiceTracker<AbstractDAOFactory, AbstractDAOFactory> st;
+     static AbstractDAOFactory instance=null;
+     static ServiceTracker<AbstractDAOFactory, AbstractDAOFactory> st=null;
 
     public static AbstractDAOFactory getInstance() {
         if (instance == null) {

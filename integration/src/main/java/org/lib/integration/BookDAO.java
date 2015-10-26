@@ -15,7 +15,7 @@ public interface BookDAO {
     void create(String title, String author) throws LibraryException;
 
     Collection<Book> getAll() throws LibraryException;
-    
-    void delete(BookId bookId)  throws LibraryException;
+
+    void delete(BookId bookId) throws LibraryException;
 
 }
